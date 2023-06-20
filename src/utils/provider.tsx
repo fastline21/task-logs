@@ -5,7 +5,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+interface ProviderInterface {
+	children: React.ReactNode;
+}
+
+const Provider = ({ children }: ProviderInterface) => {
 	const queryClient = new QueryClient();
 
 	return (

@@ -1,45 +1,41 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { format } from 'date-fns';
 import NextLink from 'next/link';
 import {
 	Card,
-	CardHeader,
 	CardBody,
-	CardFooter,
 	Heading,
 	Text,
-	Flex,
 	Box,
 	Button,
-	Spacer,
 	HStack,
 } from '@chakra-ui/react';
 
-const TasksPage = () => {
-	const { isLoading, error, data } = useQuery({
-		queryKey: ['tasksData'],
-		queryFn: async () => {
-			const res = await axios({
-				method: 'get',
-				url: '/api/tasks',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+import { getAllTasksBySearchDate } from '@/controllers/tasks.controller';
 
-			return res.data;
-		},
+import { getDateFormat } from '@/utils/date-helper';
+
+const TasksPage = () => {
+	const TaskQuery = useQuery({
+		queryKey: ['TaskData'],
+		queryFn: async () =>
+			getAllTasksBySearchDate({
+				payload: {
+					task_date: getDateFormat({
+						date: new Date(),
+					}),
+				},
+			}),
 	});
 
-	if (isLoading) {
+	if (TaskQuery.isLoading) {
 		return <p>Loading...</p>;
 	}
 
-	if (error) {
-		return <p>An error has occurred: ${JSON.stringify(error)}</p>;
+	if (TaskQuery.error) {
+		return <p>An error has occurred: {JSON.stringify(TaskQuery.error)}</p>;
 	}
 	return (
 		<div>
@@ -47,7 +43,7 @@ const TasksPage = () => {
 			<Button color='teal.500' href='/tasks/create' as={NextLink}>
 				Create New Task
 			</Button>
-			{data.data.map((datum: any, key: any) => (
+			{TaskQuery.data.map((datum: any, key: any) => (
 				<Card key={key}>
 					<CardBody>
 						<Heading size='lg'>

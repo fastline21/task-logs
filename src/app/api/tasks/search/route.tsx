@@ -6,6 +6,12 @@ import Tasks from '@/models/tasks';
 
 import { startTime, endTime } from '@/constants/task-date';
 
+/**
+ * POST /api/tasks/search
+ *
+ * @param req
+ * @returns
+ */
 export const POST = async (req: NextRequest) => {
 	const { task_date } = await req.json();
 
