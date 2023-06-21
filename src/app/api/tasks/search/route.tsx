@@ -25,7 +25,8 @@ export const POST = async (req: NextRequest) => {
 			},
 		})
 			.populate('source', 'name')
-			.populate('service', 'name');
+			.populate('service', 'name')
+			.sort({ task_date_start: 1 });
 
 		return NextResponse.json(
 			{

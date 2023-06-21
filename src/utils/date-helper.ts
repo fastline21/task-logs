@@ -5,7 +5,7 @@ interface GetDateFormatInterface {
 	formatDate?: string;
 }
 export const getDateFormat = ({
-	date,
+	date = new Date(),
 	formatDate = 'yyyy-MM-dd',
 }: GetDateFormatInterface) => {
 	if (!date) {
