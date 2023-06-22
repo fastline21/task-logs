@@ -36,6 +36,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Environment Variable
 
 ```
-MONGODB_URI={[ MongoDB URI ]}
-DB_NAME={{ Database Name }}
+MONGODB_URI={{ MongoDB URI }}
+DB_NAME={{ Database Name}}
+NEXT_PUBLIC_SITE_TITLE={{ Site Title }}
+GOOGLE_CLIENT_ID={{ Google Client ID }}
+GOOGLE_CLIENT_SECRET={{ Google Client Secret }}
+NEXTAUTH_URL={{ Site URL }}
+NEXTAUTH_URL_INTERNAL={{ Site URL }}
+NEXTAUTH_SECRET={{ Next Secret }}
 ```
