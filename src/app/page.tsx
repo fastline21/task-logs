@@ -1,16 +1,14 @@
 'use client';
 
-import { Box, Text, Button } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Box, Text, Container } from '@chakra-ui/react';
 
 const HomePage = () => {
 	return (
-		<Box>
-			<Text>Home Page</Text>
-			<Button as={NextLink} href='/tasks'>
-				Tasks
-			</Button>
-		</Box>
+		<Container maxW='container.md'>
+			<Box>
+				<Text fontSize='5xl'>Home Page</Text>
+			</Box>
+		</Container>
 	);
 };
 

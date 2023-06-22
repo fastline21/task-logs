@@ -9,6 +9,10 @@ import {
 	Select,
 	Box,
 	useToast,
+	Container,
+	Text,
+	Flex,
+	Progress,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -20,6 +24,7 @@ import { useRouter } from 'next/navigation';
 import { addTask } from '@/controllers/tasks.controller';
 import { getAllServices } from '@/controllers/services.controller';
 import { getAllSources } from '@/controllers/sources.controller';
+import ProgressBar from '@/components/Loading/ProgressBar';
 
 interface FormInterface {
 	task_date: String;
@@ -80,115 +85,148 @@ const CreateTaskPage = () => {
 	};
 
 	return (
-		<Box>
-			<h1>Create Task Page</h1>
-			<form onSubmit={TaskQuery.handleSubmit(onSubmit)}>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.task_date ? true : false}
-				>
-					<FormLabel>Task Date</FormLabel>
-					<Input
-						type='date'
-						{...TaskQuery.register('task_date', {
-							required: 'Task Date is required',
-						})}
-					/>
-				</FormControl>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.task_date_start ? true : false}
-				>
-					<FormLabel>Task Start Time</FormLabel>
-					<Input
-						type='time'
-						{...TaskQuery.register('task_date_start', {
-							required: 'Task Date Start',
-						})}
-					/>
-				</FormControl>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.task_date_end ? true : false}
-				>
-					<FormLabel>Task End Time</FormLabel>
-					<Input type='time' {...TaskQuery.register('task_date_end')} />
-				</FormControl>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.description ? true : false}
-				>
-					<FormLabel>Description</FormLabel>
-					<Input
-						type='text'
-						{...TaskQuery.register('description', {
-							required: 'Description is required',
-						})}
-					/>
-					<FormErrorMessage>
-						{TaskQuery.formState.errors.description?.message}
-					</FormErrorMessage>
-				</FormControl>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.source_id ? true : false}
-				>
-					<FormLabel>Source</FormLabel>
-					<Select
-						placeholder='Select source'
-						{...TaskQuery.register('source_id', {
-							required: 'Source is required',
-						})}
-					>
-						{sourcesQuery.data?.data.data.map(
-							(
-								datum: {
-									id: string;
-									name: String;
-								},
-								index: Key
-							) => (
-								<option key={index} value={datum.id}>
-									{datum.name}
-								</option>
-							)
-						)}
-					</Select>
-					<FormErrorMessage>
-						{TaskQuery.formState.errors.source_id?.message}
-					</FormErrorMessage>
-				</FormControl>
-				<FormControl
-					isInvalid={TaskQuery.formState.errors.service_id ? true : false}
-				>
-					<FormLabel>Service</FormLabel>
-					<Select
-						placeholder='Select service'
-						{...TaskQuery.register('service_id', {
-							required: 'Service is required',
-						})}
-					>
-						{servicesQuery.data?.data.data.map(
-							(
-								datum: {
-									id: string;
-									name: String;
-								},
-								index: Key
-							) => (
-								<option key={index} value={datum.id}>
-									{datum.name}
-								</option>
-							)
-						)}
-					</Select>
-					<FormErrorMessage>
-						{TaskQuery.formState.errors.service_id?.message}
-					</FormErrorMessage>
-				</FormControl>
-				<Button type='submit' mt='5'>
-					Submit
-				</Button>
-			</form>
-			<Button as={NextLink} href='/tasks'>
-				Back
-			</Button>
-		</Box>
+		<>
+			<ProgressBar isLoading={TaskMutation.isLoading} />
+			<Container maxW='container.md'>
+				<Box>
+					<Text fontSize='5xl'>Create Task</Text>
+				</Box>
+				<Box>
+					<form onSubmit={TaskQuery.handleSubmit(onSubmit)}>
+						<Box my='3'>
+							<FormControl
+								isInvalid={TaskQuery.formState.errors.task_date ? true : false}
+							>
+								<FormLabel>Task Date</FormLabel>
+								<Input
+									type='date'
+									{...TaskQuery.register('task_date', {
+										required: 'Task Date is required',
+									})}
+								/>
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<FormControl
+								isInvalid={
+									TaskQuery.formState.errors.task_date_start ? true : false
+								}
+							>
+								<FormLabel>Task Start Time</FormLabel>
+								<Input
+									type='time'
+									{...TaskQuery.register('task_date_start', {
+										required: 'Task Date Start',
+									})}
+								/>
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<FormControl
+								isInvalid={
+									TaskQuery.formState.errors.task_date_end ? true : false
+								}
+							>
+								<FormLabel>Task End Time</FormLabel>
+								<Input type='time' {...TaskQuery.register('task_date_end')} />
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<FormControl
+								isInvalid={
+									TaskQuery.formState.errors.description ? true : false
+								}
+							>
+								<FormLabel>Description</FormLabel>
+								<Input
+									type='text'
+									{...TaskQuery.register('description', {
+										required: 'Description is required',
+									})}
+								/>
+								<FormErrorMessage>
+									{TaskQuery.formState.errors.description?.message}
+								</FormErrorMessage>
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<FormControl
+								isInvalid={TaskQuery.formState.errors.source_id ? true : false}
+							>
+								<FormLabel>Source</FormLabel>
+								<Select
+									placeholder='Select source'
+									{...TaskQuery.register('source_id', {
+										required: 'Source is required',
+									})}
+								>
+									{sourcesQuery.data?.data.data.map(
+										(
+											datum: {
+												id: string;
+												name: String;
+											},
+											index: Key
+										) => (
+											<option key={index} value={datum.id}>
+												{datum.name}
+											</option>
+										)
+									)}
+								</Select>
+								<FormErrorMessage>
+									{TaskQuery.formState.errors.source_id?.message}
+								</FormErrorMessage>
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<FormControl
+								isInvalid={TaskQuery.formState.errors.service_id ? true : false}
+							>
+								<FormLabel>Service</FormLabel>
+								<Select
+									placeholder='Select service'
+									{...TaskQuery.register('service_id', {
+										required: 'Service is required',
+									})}
+								>
+									{servicesQuery.data?.data.data.map(
+										(
+											datum: {
+												id: string;
+												name: String;
+											},
+											index: Key
+										) => (
+											<option key={index} value={datum.id}>
+												{datum.name}
+											</option>
+										)
+									)}
+								</Select>
+								<FormErrorMessage>
+									{TaskQuery.formState.errors.service_id?.message}
+								</FormErrorMessage>
+							</FormControl>
+						</Box>
+						<Box my='3'>
+							<Flex minWidth='max-content' alignItems='center' gap='2'>
+								<Box>
+									<Button as={NextLink} href='/tasks' color='blue.500'>
+										Cancel
+									</Button>
+								</Box>
+								<Box>
+									<Button type='submit' colorScheme='blue'>
+										Submit
+									</Button>
+								</Box>
+							</Flex>
+						</Box>
+					</form>
+				</Box>
+			</Container>
+		</>
 	);
 };
 
