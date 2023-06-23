@@ -57,9 +57,9 @@ const TasksPage = () => {
 		setCurrentDate(value);
 
 		if (value !== getDateFormat({ date: new Date() })) {
-			router.push(`/tasks/?date=${value}`);
+			router.push(`/dashboard/tasks/?date=${value}`);
 		} else {
-			router.push('/tasks');
+			router.push('/dashboard/tasks');
 		}
 	};
 

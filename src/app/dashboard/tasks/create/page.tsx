@@ -76,7 +76,7 @@ const CreateTaskPage = () => {
 				position: 'top-right',
 				status: 'success',
 			});
-			push('/tasks');
+			push('/dashboard/tasks');
 		},
 	});
 
@@ -212,7 +212,11 @@ const CreateTaskPage = () => {
 						<Box my='3'>
 							<Flex minWidth='max-content' alignItems='center' gap='2'>
 								<Box>
-									<Button as={NextLink} href='/tasks' color='blue.500'>
+									<Button
+										as={NextLink}
+										href='/dashboard/tasks'
+										color='blue.500'
+									>
 										Cancel
 									</Button>
 								</Box>

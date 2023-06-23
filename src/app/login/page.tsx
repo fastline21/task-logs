@@ -35,7 +35,7 @@ const LoginPage = () => {
 							onClick={() => {
 								signIn(provider.id, {
 									redirect: true,
-									callbackUrl: '/tasks',
+									callbackUrl: '/dashboard/tasks',
 								});
 							}}
 							leftIcon={<Icon name={provider.name} />}
