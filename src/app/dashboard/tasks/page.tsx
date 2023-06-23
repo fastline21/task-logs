@@ -27,6 +27,7 @@ import { getAllTasksBySearchDate } from '@/controllers/tasks.controller';
 
 import { getDateFormat } from '@/utils/date-helper';
 import ProgressBar from '@/components/Loading/ProgressBar';
+import ProgressText from '@/components/Loading/ProgressText';
 
 const TasksPage = () => {
 	const searchParams = useSearchParams();
@@ -80,54 +81,61 @@ const TasksPage = () => {
 					</FormControl>
 				</Box>
 				<Box my='3'>
-					<Button color='teal.500' href='/tasks/create' as={NextLink}>
+					<Button color='teal.500' href='/dashboard/tasks/create' as={NextLink}>
 						Create New Task
 					</Button>
 				</Box>
 				<Box>
-					<Wrap spacing='10px'>
-						{TaskQuery.data?.map((datum: any, key: any) => (
-							<WrapItem key={key}>
-								<Card width='238px'>
-									<CardBody>
-										<Heading size='md'>
-											{format(new Date(datum.task_date_start), 'MMMM dd, yyyy')}
-										</Heading>
-										<Box>
-											<Text>
-												{format(new Date(datum.task_date_start), 'hh:mm b')} -{' '}
-												{format(new Date(datum.task_date_end), 'hh:mm b')}
-											</Text>
-										</Box>
-										<Box>
-											<Text>{datum.description}</Text>
-										</Box>
-										<Box>
-											<HStack spacing='12px'>
-												<Box
-													p='2'
-													bg='teal.50'
-													color='teal.400'
-													borderRadius='xl'
-												>
-													<Text fontWeight='bold'>{datum.source.name}</Text>
-												</Box>
+					{TaskQuery.isLoading ? (
+						<ProgressText />
+					) : (
+						<Wrap spacing='10px'>
+							{TaskQuery.data?.map((datum: any, key: any) => (
+								<WrapItem key={key}>
+									<Card width='238px'>
+										<CardBody>
+											<Heading size='md'>
+												{format(
+													new Date(datum.task_date_start),
+													'MMMM dd, yyyy'
+												)}
+											</Heading>
+											<Box>
+												<Text>
+													{format(new Date(datum.task_date_start), 'hh:mm b')} -{' '}
+													{format(new Date(datum.task_date_end), 'hh:mm b')}
+												</Text>
+											</Box>
+											<Box>
+												<Text>{datum.description}</Text>
+											</Box>
+											<Box>
+												<HStack spacing='12px'>
+													<Box
+														p='2'
+														bg='teal.50'
+														color='teal.400'
+														borderRadius='xl'
+													>
+														<Text fontWeight='bold'>{datum.source.name}</Text>
+													</Box>
 
-												<Box
-													p='2'
-													bg='blue.50'
-													color='blue.400'
-													borderRadius='xl'
-												>
-													<Text fontWeight='bold'>{datum.service.name}</Text>
-												</Box>
-											</HStack>
-										</Box>
-									</CardBody>
-								</Card>
-							</WrapItem>
-						))}
-					</Wrap>
+													<Box
+														p='2'
+														bg='blue.50'
+														color='blue.400'
+														borderRadius='xl'
+													>
+														<Text fontWeight='bold'>{datum.service.name}</Text>
+													</Box>
+												</HStack>
+											</Box>
+										</CardBody>
+									</Card>
+								</WrapItem>
+							))}
+						</Wrap>
+					)}
 				</Box>
 			</Container>
 		</>

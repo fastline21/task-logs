@@ -22,8 +22,8 @@ const Header = () => {
 							{session?.user ? (
 								<Flex minWidth='max-content' alignItems='center' gap='2'>
 									<Box>
-										<Button as={NextLink} href='/tasks' variant='link'>
-											Tasks
+										<Button as={NextLink} href='/dashboard' variant='link'>
+											Dashboard
 										</Button>
 									</Box>
 									<Spacer />
