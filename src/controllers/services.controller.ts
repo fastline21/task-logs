@@ -9,3 +9,29 @@ export const getAllServices = async () => {
 		},
 	});
 };
+
+interface AddServiceInterface {
+	name: String;
+	description: String;
+}
+export const addService = async ({
+	payload,
+}: {
+	payload: AddServiceInterface;
+}) => {
+	const { name, description } = payload;
+
+	const body = {
+		name,
+		description,
+	};
+
+	return await axios({
+		method: 'post',
+		url: '/api/services',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		data: body,
+	});
+};

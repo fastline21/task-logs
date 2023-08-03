@@ -22,13 +22,17 @@ import {
 } from '@chakra-ui/react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 import { getAllTasksBySearchDate } from '@/controllers/tasks.controller';
 
 import { getDateFormat } from '@/utils/date-helper';
+
 import ProgressBar from '@/components/Loading/ProgressBar';
 
 const TasksPage = () => {
+	const { data: session } = useSession();
+
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [currentDate, setCurrentDate] = useState(
@@ -65,32 +69,33 @@ const TasksPage = () => {
 	return (
 		<>
 			<ProgressBar isLoading={TaskQuery.isLoading} />
-			<Container maxW='container.md'>
-				<Box>
-					<Text fontSize='5xl'>Tasks Page</Text>
+			<Container maxW="container.md">
+				<Box my="3">
+					<Text fontSize="5xl">Welcome back!</Text>
+					<Text fontSize="3xl">{session?.user?.name}</Text>
 				</Box>
-				<Box my='3'>
+				<Box my="3">
 					<FormControl>
 						<FormLabel>Task Date</FormLabel>
 						<Input
-							type='date'
+							type="date"
 							value={currentDate}
 							onChange={handleCurrentDateChange}
 						/>
 					</FormControl>
 				</Box>
-				<Box my='3'>
-					<Button color='teal.500' href='/tasks/create' as={NextLink}>
+				<Box my="3">
+					<Button color="teal.500" href="/tasks/create" as={NextLink}>
 						Create New Task
 					</Button>
 				</Box>
 				<Box>
-					<Wrap spacing='10px'>
+					<Wrap spacing="10px">
 						{TaskQuery.data?.map((datum: any, key: any) => (
 							<WrapItem key={key}>
-								<Card width='238px'>
+								<Card width="238px">
 									<CardBody>
-										<Heading size='md'>
+										<Heading size="md">
 											{format(new Date(datum.task_date_start), 'MMMM dd, yyyy')}
 										</Heading>
 										<Box>
@@ -103,23 +108,23 @@ const TasksPage = () => {
 											<Text>{datum.description}</Text>
 										</Box>
 										<Box>
-											<HStack spacing='12px'>
+											<HStack spacing="12px">
 												<Box
-													p='2'
-													bg='teal.50'
-													color='teal.400'
-													borderRadius='xl'
+													p="2"
+													bg="teal.50"
+													color="teal.400"
+													borderRadius="xl"
 												>
-													<Text fontWeight='bold'>{datum.source.name}</Text>
+													<Text fontWeight="bold">{datum.source.name}</Text>
 												</Box>
 
 												<Box
-													p='2'
-													bg='blue.50'
-													color='blue.400'
-													borderRadius='xl'
+													p="2"
+													bg="blue.50"
+													color="blue.400"
+													borderRadius="xl"
 												>
-													<Text fontWeight='bold'>{datum.service.name}</Text>
+													<Text fontWeight="bold">{datum.service.name}</Text>
 												</Box>
 											</HStack>
 										</Box>
