@@ -5,6 +5,8 @@ import { signIn, getProviders } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
+import ProgressBar from '@/components/Loading/ProgressBar';
+
 const LoginPage = () => {
 	const [providers, setProviders] = useState<any>(null);
 
@@ -23,28 +25,31 @@ const LoginPage = () => {
 	};
 
 	return (
-		<Container maxW='container.md'>
-			<Box>
-				<Text fontSize='5xl'>Login Page</Text>
-			</Box>
-			<Box>
-				{providers &&
-					Object.values(providers).map((provider: any) => (
-						<Button
-							key={provider.name}
-							onClick={() => {
-								signIn(provider.id, {
-									redirect: true,
-									callbackUrl: '/tasks',
-								});
-							}}
-							leftIcon={<Icon name={provider.name} />}
-						>
-							{provider.name}
-						</Button>
-					))}
-			</Box>
-		</Container>
+		<>
+			<ProgressBar isLoading={!providers} />
+			<Container maxW="container.md">
+				<Box>
+					<Text fontSize="5xl">Login Page</Text>
+				</Box>
+				<Box>
+					{providers &&
+						Object.values(providers).map((provider: any) => (
+							<Button
+								key={provider.name}
+								onClick={() => {
+									signIn(provider.id, {
+										redirect: true,
+										callbackUrl: '/tasks',
+									});
+								}}
+								leftIcon={<Icon name={provider.name} />}
+							>
+								{provider.name}
+							</Button>
+						))}
+				</Box>
+			</Container>
+		</>
 	);
 };
 
