@@ -18,6 +18,9 @@ export const addTask = async ({ payload }: { payload: AddTaskInterface }) => {
 		service_id,
 	} = payload;
 
+	console.log('task_date_start:', task_date_start);
+	console.log('task_date_end:', task_date_end);
+
 	const body = {
 		task_date_start: `${task_date} ${task_date_start}`,
 		task_date_end: `${task_date} ${task_date_end}`,
