@@ -24,6 +24,7 @@ import { useRouter } from 'next/navigation';
 import { addTask } from '@/controllers/tasks.controller';
 import { getAllServices } from '@/controllers/services.controller';
 import { getAllSources } from '@/controllers/sources.controller';
+
 import ProgressBar from '@/components/Loading/ProgressBar';
 
 interface FormInterface {
@@ -87,26 +88,26 @@ const CreateTaskPage = () => {
 	return (
 		<>
 			<ProgressBar isLoading={TaskMutation.isLoading} />
-			<Container maxW='container.md'>
+			<Container maxW="container.md">
 				<Box>
-					<Text fontSize='5xl'>Create Task</Text>
+					<Text fontSize="5xl">Create Task</Text>
 				</Box>
 				<Box>
 					<form onSubmit={TaskQuery.handleSubmit(onSubmit)}>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={TaskQuery.formState.errors.task_date ? true : false}
 							>
 								<FormLabel>Task Date</FormLabel>
 								<Input
-									type='date'
+									type="date"
 									{...TaskQuery.register('task_date', {
 										required: 'Task Date is required',
 									})}
 								/>
 							</FormControl>
 						</Box>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={
 									TaskQuery.formState.errors.task_date_start ? true : false
@@ -114,24 +115,24 @@ const CreateTaskPage = () => {
 							>
 								<FormLabel>Task Start Time</FormLabel>
 								<Input
-									type='time'
+									type="time"
 									{...TaskQuery.register('task_date_start', {
 										required: 'Task Date Start',
 									})}
 								/>
 							</FormControl>
 						</Box>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={
 									TaskQuery.formState.errors.task_date_end ? true : false
 								}
 							>
 								<FormLabel>Task End Time</FormLabel>
-								<Input type='time' {...TaskQuery.register('task_date_end')} />
+								<Input type="time" {...TaskQuery.register('task_date_end')} />
 							</FormControl>
 						</Box>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={
 									TaskQuery.formState.errors.description ? true : false
@@ -139,7 +140,7 @@ const CreateTaskPage = () => {
 							>
 								<FormLabel>Description</FormLabel>
 								<Input
-									type='text'
+									type="text"
 									{...TaskQuery.register('description', {
 										required: 'Description is required',
 									})}
@@ -149,13 +150,13 @@ const CreateTaskPage = () => {
 								</FormErrorMessage>
 							</FormControl>
 						</Box>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={TaskQuery.formState.errors.source_id ? true : false}
 							>
 								<FormLabel>Source</FormLabel>
 								<Select
-									placeholder='Select source'
+									placeholder="Select source"
 									{...TaskQuery.register('source_id', {
 										required: 'Source is required',
 									})}
@@ -179,13 +180,13 @@ const CreateTaskPage = () => {
 								</FormErrorMessage>
 							</FormControl>
 						</Box>
-						<Box my='3'>
+						<Box my="3">
 							<FormControl
 								isInvalid={TaskQuery.formState.errors.service_id ? true : false}
 							>
 								<FormLabel>Service</FormLabel>
 								<Select
-									placeholder='Select service'
+									placeholder="Select service"
 									{...TaskQuery.register('service_id', {
 										required: 'Service is required',
 									})}
@@ -209,15 +210,15 @@ const CreateTaskPage = () => {
 								</FormErrorMessage>
 							</FormControl>
 						</Box>
-						<Box my='3'>
-							<Flex minWidth='max-content' alignItems='center' gap='2'>
+						<Box my="3">
+							<Flex minWidth="max-content" alignItems="center" gap="2">
 								<Box>
-									<Button as={NextLink} href='/tasks' color='blue.500'>
+									<Button as={NextLink} href="/tasks" color="blue.500">
 										Cancel
 									</Button>
 								</Box>
 								<Box>
-									<Button type='submit' colorScheme='blue'>
+									<Button type="submit" colorScheme="blue">
 										Submit
 									</Button>
 								</Box>
