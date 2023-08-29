@@ -106,9 +106,12 @@ const TasksPage = () => {
 												{getDateFormat({
 													date: datum.task_date_start,
 													formatDate: 'hh:mm b',
+												})}{' '}
+												-{' '}
+												{getDateFormat({
+													date: datum.task_date_end,
+													formatDate: 'hh:mm b',
 												})}
-												{/* {format(new Date(datum.task_date_start), '')} -{' '} */}
-												{/* {format(new Date(datum.task_date_end), 'hh:mm b')} */}
 											</Text>
 										</Box>
 										<Box>
