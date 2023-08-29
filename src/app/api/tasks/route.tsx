@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { zonedTimeToUtc, toDate } from 'date-fns-tz';
 
 import { connectDB } from '@/config/database';
 
@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
 		// console.log(
 		// 	getDateFormat({ date: task_date_start, formatDate: 'yyyy-MM-dd HH:mm' })
 		// );
-		const newDate = zonedTimeToUtc(task_date_start, 'Asia/Manila');
+		const newDate = toDate(task_date_start);
 		console.log(newDate);
 
 		const newTask = new Tasks({
