@@ -23,6 +23,7 @@ import {
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { utcToZonedTime } from 'date-fns-tz';
 
 import { getAllTasksBySearchDate } from '@/controllers/tasks.controller';
 
