@@ -43,7 +43,7 @@ export const POST = async (req: NextRequest) => {
 		// console.log(
 		// 	getDateFormat({ date: task_date_start, formatDate: 'yyyy-MM-dd HH:mm' })
 		// );
-		// console.log(new Date(task_date_start));
+		console.log(new Date(task_date_start));
 
 		const newTask = new Tasks({
 			task_date_start: new Date(task_date_start),
