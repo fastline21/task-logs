@@ -4,6 +4,8 @@ import { connectDB } from '@/config/database';
 
 import Tasks from '@/models/tasks';
 
+import { getDateTime } from '@/utils/date-helper';
+
 export const GET = async () => {
 	await connectDB();
 
@@ -38,8 +40,8 @@ export const POST = async (req: NextRequest) => {
 		await connectDB();
 
 		const newTask = new Tasks({
-			task_date_start,
-			task_date_end,
+			task_date_start: getDateTime({ date: task_date_start }),
+			task_date_end: getDateTime({ date: task_date_end }),
 			description,
 			source_id,
 			service_id,
