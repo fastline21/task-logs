@@ -1,16 +1,14 @@
 import { format } from 'date-fns';
 
 interface GetDateFormatInterface {
-	date: Date;
+	date?: Date | string | null;
 	formatDate?: string;
 }
 export const getDateFormat = ({
 	date,
 	formatDate = 'yyyy-MM-dd',
 }: GetDateFormatInterface) => {
-	if (!date) {
-		return '';
-	}
+	const newDate = date ? new Date(date) : new Date();
 
-	return format(date, formatDate);
+	return format(newDate, formatDate);
 };

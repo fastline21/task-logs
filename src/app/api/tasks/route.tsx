@@ -4,6 +4,8 @@ import { connectDB } from '@/config/database';
 
 import Tasks from '@/models/tasks';
 
+import { getDateFormat } from '@/utils/date-helper';
+
 export const GET = async () => {
 	await connectDB();
 
@@ -37,8 +39,14 @@ export const POST = async (req: NextRequest) => {
 	try {
 		await connectDB();
 
+		// console.log('task_date_start:', task_date_start);
+		// console.log(
+		// 	getDateFormat({ date: task_date_start, formatDate: 'yyyy-MM-dd HH:mm' })
+		// );
+		// console.log(new Date(task_date_start));
+
 		const newTask = new Tasks({
-			task_date_start,
+			task_date_start: new Date(task_date_start),
 			task_date_end,
 			description,
 			source_id,

@@ -37,7 +37,7 @@ const TasksPage = () => {
 	const router = useRouter();
 	const [currentDate, setCurrentDate] = useState(
 		getDateFormat({
-			date: new Date(searchParams.get('date') || new Date()),
+			date: searchParams.get('date') || null,
 		})
 	);
 
@@ -59,7 +59,7 @@ const TasksPage = () => {
 		const { value } = event.target;
 		setCurrentDate(value);
 
-		if (value !== getDateFormat({ date: new Date() })) {
+		if (value !== getDateFormat({})) {
 			router.push(`/tasks/?date=${value}`);
 		} else {
 			router.push('/tasks');
@@ -96,12 +96,19 @@ const TasksPage = () => {
 								<Card width="238px">
 									<CardBody>
 										<Heading size="md">
-											{format(new Date(datum.task_date_start), 'MMMM dd, yyyy')}
+											{getDateFormat({
+												date: datum.task_date_start,
+												formatDate: 'MMMM dd, yyyy',
+											})}
 										</Heading>
 										<Box>
 											<Text>
-												{format(new Date(datum.task_date_start), 'hh:mm b')} -{' '}
-												{format(new Date(datum.task_date_end), 'hh:mm b')}
+												{getDateFormat({
+													date: datum.task_date_start,
+													formatDate: 'hh:mm b',
+												})}
+												{/* {format(new Date(datum.task_date_start), '')} -{' '} */}
+												{/* {format(new Date(datum.task_date_end), 'hh:mm b')} */}
 											</Text>
 										</Box>
 										<Box>
