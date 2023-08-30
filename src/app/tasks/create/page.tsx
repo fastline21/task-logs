@@ -27,6 +27,8 @@ import { getAllSources } from '@/controllers/sources.controller';
 
 import ProgressBar from '@/components/Loading/ProgressBar';
 
+import { getDateFormat } from '@/utils/date-helper';
+
 interface FormInterface {
 	task_date: String;
 	task_date_start: String;
@@ -72,12 +74,23 @@ const CreateTaskPage = () => {
 			return addTask({ payload: event });
 		},
 		onSuccess: (res) => {
+			const { data, message } = res.data;
+
 			toast({
-				title: res.data.message,
+				title: message,
 				position: 'top-right',
 				status: 'success',
 			});
-			push('/tasks');
+
+			const { task_date_start } = data;
+			const taskDate = getDateFormat({ date: task_date_start });
+			const currentDate = getDateFormat({});
+
+			if (taskDate !== currentDate) {
+				push(`/tasks/?date=${taskDate}`);
+			} else {
+				push('/tasks');
+			}
 		},
 	});
 
