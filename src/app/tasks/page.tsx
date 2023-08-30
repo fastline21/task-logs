@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
 import NextLink from 'next/link';
 import {
 	Card,
@@ -66,6 +65,10 @@ const TasksPage = () => {
 		}
 	};
 
+	const handleSingleTask = (id: string) => {
+		router.push(`/tasks/${id}`);
+	};
+
 	return (
 		<>
 			<ProgressBar isLoading={TaskQuery.isLoading} />
@@ -93,7 +96,11 @@ const TasksPage = () => {
 					<Wrap spacing="10px">
 						{TaskQuery.data?.map((datum: any, key: any) => (
 							<WrapItem key={key}>
-								<Card width="238px">
+								<Card
+									width="238px"
+									onClick={() => handleSingleTask(datum.id)}
+									className="pointer"
+								>
 									<CardBody>
 										<Heading size="md">
 											{getDateFormat({

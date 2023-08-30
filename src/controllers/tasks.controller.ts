@@ -71,3 +71,24 @@ export const getAllTasksBySearchDate = async ({
 
 	return res.data.data;
 };
+
+interface GetSingleTaskByIDInterface {
+	payload: {
+		id: String;
+	};
+}
+export const getSingleTaskByID = async ({
+	payload,
+}: GetSingleTaskByIDInterface) => {
+	const { id } = payload;
+
+	const res = await axios({
+		method: 'get',
+		url: `/api/tasks/${id}`,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+
+	return res.data.data;
+};
