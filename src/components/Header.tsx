@@ -39,13 +39,13 @@ const Header = () => {
 											}
 											variant="link"
 										>
-											Sign Out
+											Log Out
 										</Button>
 									</Box>
 								</Flex>
 							) : (
 								<Button as={NextLink} href="/login" variant="link">
-									Sign In
+									Log In
 								</Button>
 							)}
 						</Box>
