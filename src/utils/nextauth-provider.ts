@@ -3,5 +3,5 @@
 import { getProviders } from 'next-auth/react';
 
 export const getAllProviders = () => {
-	return getProviders();
+  return getProviders();
 };

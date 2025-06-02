@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import {
-	GetDateFormatInterface,
-	GetDateTimeInterface,
+  GetDateFormatInterface,
+  GetDateTimeInterface,
 } from '@/interfaces/date.interface';
 
 /**
@@ -14,12 +14,12 @@ import {
  * @returns
  */
 export const getDateFormat = ({
-	date,
-	formatDate = 'yyyy-MM-dd',
+  date,
+  formatDate = 'yyyy-MM-dd',
 }: GetDateFormatInterface) => {
-	const newDate = date ? new Date(date) : new Date();
+  const newDate = date ? new Date(date) : new Date();
 
-	return format(newDate, formatDate);
+  return format(newDate, formatDate);
 };
 
 /**
@@ -30,8 +30,8 @@ export const getDateFormat = ({
  * @returns
  */
 export const getDateTime = ({
-	date,
-	timezone = 'Asia/Manila',
+  date,
+  timezone = 'Asia/Manila',
 }: GetDateTimeInterface) => {
-	return zonedTimeToUtc(date, timezone);
+  return zonedTimeToUtc(date, timezone);
 };
