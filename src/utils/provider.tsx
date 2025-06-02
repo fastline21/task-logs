@@ -7,23 +7,23 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 interface ProviderInterface {
-	children: React.ReactNode;
-	session: Session;
+  children: React.ReactNode;
+  session: Session;
 }
 
 const Provider = ({ children, session }: ProviderInterface) => {
-	const queryClient = new QueryClient();
+  const queryClient = new QueryClient();
 
-	return (
-		<QueryClientProvider client={queryClient}>
-			<SessionProvider session={session}>
-				<CacheProvider>
-					<ChakraProvider>{children}</ChakraProvider>
-				</CacheProvider>
-			</SessionProvider>
-			<ReactQueryDevtools initialIsOpen={false} />
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider session={session}>
+        <CacheProvider>
+          <ChakraProvider>{children}</ChakraProvider>
+        </CacheProvider>
+      </SessionProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 };
 
 export default Provider;

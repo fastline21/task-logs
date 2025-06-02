@@ -6,24 +6,24 @@ import Provider from '@/utils/provider';
 import Header from '@/components/Header';
 
 export const metadata = {
-	title: `Home - ${process.env.NEXT_PUBLIC_SITE_TITLE}`,
+  title: `Home - ${process.env.NEXT_PUBLIC_SITE_TITLE}`,
 };
 
 export default function RootLayout({
-	children,
-	session,
+  children,
+  session,
 }: {
-	children: React.ReactNode;
-	session: Session;
+  children: React.ReactNode;
+  session: Session;
 }) {
-	return (
-		<html lang='en'>
-			<body>
-				<Provider session={session}>
-					<Header />
-					<main>{children}</main>
-				</Provider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>
+        <Provider session={session}>
+          <Header />
+          <main>{children}</main>
+        </Provider>
+      </body>
+    </html>
+  );
 }

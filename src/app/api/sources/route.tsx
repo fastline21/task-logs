@@ -5,50 +5,50 @@ import { connectDB } from '@/config/database';
 import Sources from '@/models/sources';
 
 export const GET = async () => {
-	await connectDB();
+  await connectDB();
 
-	try {
-		const sources = await Sources.find({});
+  try {
+    const sources = await Sources.find({});
 
-		return NextResponse.json(
-			{
-				data: sources,
-				message: 'Success Sources data found',
-				statusCode: 200,
-			},
-			{
-				status: 200,
-			}
-		);
-	} catch (error: any) {
-		return NextResponse.json(
-			{ data: {}, message: error.message, statusCode: error.status },
-			{ status: error.status }
-		);
-	}
+    return NextResponse.json(
+      {
+        data: sources,
+        message: 'Success Sources data found',
+        statusCode: 200,
+      },
+      {
+        status: 200,
+      },
+    );
+  } catch (error: any) {
+    return NextResponse.json(
+      { data: {}, message: error.message, statusCode: error.status },
+      { status: error.status },
+    );
+  }
 };
 
 export const POST = async (req: NextRequest) => {
-	const { name, description } = await req.json();
+  const { name, description } = await req.json();
 
-	try {
-		await connectDB();
+  try {
+    await connectDB();
 
-		const newSource = new Sources({
-			name,
-			description,
-		});
-		await newSource.save();
+    const newSource = new Sources({
+      name,
+      description,
+    });
+    await newSource.save();
 
-		return NextResponse.json({
-			data: newSource,
-			message: 'Success add new source',
-			statusCode: 200,
-		});
-	} catch (error: any) {
-		return NextResponse.json(
-			{ data: {}, message: error.message, statusCode: 500 },
-			{ status: 500 }
-		);
-	}
+    return NextResponse.json({
+      data: newSource,
+      message: 'Success add new source',
+      statusCode: 200,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { data: {}, message: error.message, statusCode: 500 },
+      { status: 500 },
+    );
+  }
 };

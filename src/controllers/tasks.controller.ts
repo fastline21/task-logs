@@ -3,92 +3,92 @@ import axios from 'axios';
 import { getDateTime } from '@/utils/date-helper';
 
 interface AddTaskInterface {
-	task_date: String;
-	task_date_start: String;
-	task_date_end: String;
-	description: String;
-	source_id: String;
-	service_id: String;
+  task_date: String;
+  task_date_start: String;
+  task_date_end: String;
+  description: String;
+  source_id: String;
+  service_id: String;
 }
 export const addTask = async ({ payload }: { payload: AddTaskInterface }) => {
-	const {
-		task_date,
-		task_date_start,
-		task_date_end,
-		description,
-		source_id,
-		service_id,
-	} = payload;
+  const {
+    task_date,
+    task_date_start,
+    task_date_end,
+    description,
+    source_id,
+    service_id,
+  } = payload;
 
-	const body = {
-		task_date_start: `${task_date} ${task_date_start}`,
-		task_date_end: `${task_date} ${task_date_end}`,
-		description,
-		source_id,
-		service_id,
-	};
+  const body = {
+    task_date_start: `${task_date} ${task_date_start}`,
+    task_date_end: `${task_date} ${task_date_end}`,
+    description,
+    source_id,
+    service_id,
+  };
 
-	return await axios({
-		method: 'post',
-		url: '/api/tasks',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		data: body,
-	});
+  return await axios({
+    method: 'post',
+    url: '/api/tasks',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+  });
 };
 
 export const getAllTasks = async () => {
-	const res = await axios({
-		method: 'get',
-		url: '/api/tasks',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+  const res = await axios({
+    method: 'get',
+    url: '/api/tasks',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-	return res.data.data;
+  return res.data.data;
 };
 
 interface GetAllTasksBySearchDateInterface {
-	payload: {
-		task_date: String;
-	};
+  payload: {
+    task_date: String;
+  };
 }
 export const getAllTasksBySearchDate = async ({
-	payload,
+  payload,
 }: GetAllTasksBySearchDateInterface) => {
-	const { task_date } = payload;
+  const { task_date } = payload;
 
-	const res = await axios({
-		method: 'post',
-		url: '/api/tasks/search',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		data: { task_date },
-	});
+  const res = await axios({
+    method: 'post',
+    url: '/api/tasks/search',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: { task_date },
+  });
 
-	return res.data.data;
+  return res.data.data;
 };
 
 interface GetSingleTaskByIDInterface {
-	payload: {
-		id: String;
-	};
+  payload: {
+    id: String;
+  };
 }
 export const getSingleTaskByID = async ({
-	payload,
+  payload,
 }: GetSingleTaskByIDInterface) => {
-	const { id } = payload;
+  const { id } = payload;
 
-	const res = await axios({
-		method: 'get',
-		url: `/api/tasks/${id}`,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+  const res = await axios({
+    method: 'get',
+    url: `/api/tasks/${id}`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-	return res.data.data;
+  return res.data.data;
 };
