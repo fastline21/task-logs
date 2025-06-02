@@ -1,45 +1,64 @@
 {
-  "name": "task-logs",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/next-js": "^2.1.4",
-    "@chakra-ui/react": "^2.7.0",
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@tanstack/react-query": "^4.29.12",
-    "@tanstack/react-query-devtools": "^4.29.12",
-    "@types/node": "20.2.5",
-    "@types/react": "18.2.8",
-    "@types/react-datepicker": "^4.11.2",
-    "@types/react-dom": "18.2.4",
-    "axios": "^1.4.0",
-    "bcrypt": "^5.1.0",
-    "chakra-dayzed-datepicker": "^0.2.8",
-    "date-fns": "^2.30.0",
-    "date-fns-tz": "^2.0.0",
-    "dayzed": "^3.2.3",
-    "eslint": "8.41.0",
-    "eslint-config-next": "13.4.4",
-    "framer-motion": "^10.12.16",
-    "mongoose": "^7.2.2",
-    "next": "^13.4.7",
-    "next-auth": "^4.22.1",
-    "react": "18.2.0",
-    "react-datepicker": "^4.12.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "^7.44.3",
-    "react-icons": "^4.10.1",
-    "typescript": "5.1.3"
-  },
-  "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^4.29.9"
-  }
+    "name": "task-logs",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "lint:fix": "next lint --fix",
+        "format": "npx prettier . --check",
+        "format:fix": "npx prettier . --write",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "@chakra-ui/icons": "^2.0.19",
+        "@chakra-ui/next-js": "^2.1.4",
+        "@chakra-ui/react": "^2.7.0",
+        "@emotion/react": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
+        "@tanstack/react-query": "^4.29.12",
+        "@tanstack/react-query-devtools": "^4.29.12",
+        "@types/node": "20.2.5",
+        "@types/react": "18.2.8",
+        "@types/react-datepicker": "^4.11.2",
+        "@types/react-dom": "18.2.4",
+        "axios": "^1.4.0",
+        "bcrypt": "^5.1.0",
+        "chakra-dayzed-datepicker": "^0.2.8",
+        "date-fns": "^2.30.0",
+        "date-fns-tz": "^2.0.0",
+        "dayzed": "^3.2.3",
+        "eslint": "8.41.0",
+        "eslint-config-next": "13.4.4",
+        "framer-motion": "^10.12.16",
+        "mongoose": "^7.2.2",
+        "next": "^13.4.7",
+        "next-auth": "^4.22.1",
+        "react": "18.2.0",
+        "react-datepicker": "^4.12.0",
+        "react-dom": "18.2.0",
+        "react-hook-form": "^7.44.3",
+        "react-icons": "^4.10.1",
+        "typescript": "5.1.3"
+    },
+    "devDependencies": {
+        "@tanstack/eslint-plugin-query": "^4.29.9",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.0",
+        "prettier": "^3.5.3"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,md,css,scss}": [
+            "prettier --write"
+        ]
+    },
+    "engines": {
+        "node": "22.x"
+    }
 }
