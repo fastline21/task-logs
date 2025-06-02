@@ -34,7 +34,7 @@ const SingleTaskPage = () => {
     queryFn: async () =>
       getSingleTaskByID({
         payload: {
-          id: taskID,
+          id: taskID as string,
         },
       }),
   });
