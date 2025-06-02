@@ -74,7 +74,7 @@ export const getAllTasksBySearchDate = async ({
 
 interface GetSingleTaskByIDInterface {
   payload: {
-    id: String;
+    id: string;
   };
 }
 export const getSingleTaskByID = async ({
